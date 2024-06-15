@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">EMAir</string>
+    <string name="air_tickets">Авиабилеты</string>
+    <string name="hotels">Отели</string>
+    <string name="nearby">Короче</string>
+    <string name="subscriptions">Подписки</string>
+    <string name="profile">Профиль</string>
+    <string name="cheap_tickets_search">Поиск дешевых авибилетов</string>
+    <string name="city_from_hint">Откуда - Москва</string>
+    <string name="hint_city_to">Куда - Турция</string>
+</resources>
