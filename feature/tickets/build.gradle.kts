@@ -10,6 +10,8 @@ android {
 
 dependencies {
     implementation(libs.material)
+    implementation(libs.fragment.ktx)
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
+    implementation(project(":core:data"))
 }

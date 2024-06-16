@@ -1,10 +1,10 @@
 package com.example.emair.di
 
 import android.app.Application
-import com.example.tickets.di.TicketsComponentDependenciesProvider
-import com.example.tickets.di.TicketsDependencies
+import com.example.tickets.di.deps.TicketsComponentDependenciesProvider
+import com.example.tickets.di.deps.TicketsDependencies
 
-class EMAirApp: Application(), TicketsComponentDependenciesProvider{
+class EMAirApp: Application(), TicketsComponentDependenciesProvider {
 
     val applicationComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent

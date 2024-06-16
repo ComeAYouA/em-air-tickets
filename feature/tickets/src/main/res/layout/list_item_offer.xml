@@ -11,7 +11,7 @@
         android:layout_height="132dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY"
-        android:src="@drawable/img_test"
+        tools:src="@drawable/img_test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -27,7 +27,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/shapeableImageView"
-        android:text="Die Antword" />
+        tools:text="Die Antword" />
 
     <TextView
         android:id="@+id/text_view_city"
@@ -39,7 +39,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_title"
-        android:text="Будапешт" />
+        tools:text="Будапешт" />
 
     <ImageView
         android:id="@+id/imageView_airplane"
@@ -63,6 +63,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/imageView_airplane"
         app:layout_constraintTop_toTopOf="@+id/imageView_airplane"
-        android:text="от 22 264 Р" />
+        tools:text="от 22 264 Р" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

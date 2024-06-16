@@ -36,6 +36,7 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
                 buildFeatures {
                     viewBinding = true
+                    dataBinding = true
                 }
             }
 

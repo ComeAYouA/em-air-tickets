@@ -18,6 +18,7 @@ dependencies {
 
     implementation(project(":core:ui"))
     implementation(project(":core:network"))
+    implementation(project(":core:data"))
     implementation(project(":feature:tickets"))
     implementation(project(":feature:hotels"))
     implementation(project(":feature:places"))

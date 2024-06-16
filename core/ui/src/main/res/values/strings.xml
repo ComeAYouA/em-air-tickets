@@ -8,4 +8,11 @@
     <string name="cheap_tickets_search">Поиск дешевых авибилетов</string>
     <string name="city_from_hint">Откуда - Москва</string>
     <string name="hint_city_to">Куда - Турция</string>
+    <string name="from">от</string>
+    <string name="fly_away_musically">Музыкально отлететь</string>
+    <string name="difficult_way">Сложный путь</string>
+    <string name="anywhere">Куда угодно</string>
+    <string name="holidays">Выходные</string>
+    <string name="fire_offer">Горячие билеты</string>
+
 </resources>

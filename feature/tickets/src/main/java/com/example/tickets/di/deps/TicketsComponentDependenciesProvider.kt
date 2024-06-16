@@ -1,4 +1,4 @@
-package com.example.tickets.di
+package com.example.tickets.di.deps
 
 interface TicketsComponentDependenciesProvider {
     fun getTicketsComponentDependencies(): TicketsDependencies

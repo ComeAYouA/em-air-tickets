@@ -1,6 +1,5 @@
 plugins {
     id("emair.android.library")
-    id("emair.androidX")
     id("emair.dagger")
     id("kotlinx-serialization")
 }
