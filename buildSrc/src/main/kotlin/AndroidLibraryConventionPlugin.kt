@@ -42,6 +42,14 @@ class AndroidLibraryConventionPlugin : Plugin<Project> {
 
             dependencies {
                 add(
+                    "implementation",
+                    versionCatalog.findLibrary("androidx-navigation-fragment-ktx").get()
+                )
+                add(
+                    "implementation",
+                    versionCatalog.findLibrary("androidx-navigation-ui-ktx").get()
+                )
+                add(
                     "testImplementation",
                     versionCatalog.findLibrary("junit").get()
                 )

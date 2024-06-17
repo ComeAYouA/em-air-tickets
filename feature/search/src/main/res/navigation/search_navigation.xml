@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/search_nav_graph"
+    app:startDestination="@id/fragment_search">
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="com.example.search.ModalSearchFragment"
+        android:label="@string/anywhere"
+        tools:layout="@layout/bottom_sheet">
+        <deepLink
+            app:uri="android-app://com.example/search_fragment" />
+    </fragment>
+
+</navigation>

@@ -1,7 +1,6 @@
 plugins {
     id("emair.android.library")
     id("emair.androidX")
-    id("emair.dagger")
 }
 
 android {
@@ -10,8 +9,5 @@ android {
 
 dependencies {
     implementation(libs.material)
-    implementation(libs.fragment.ktx)
     implementation(project(":core:ui"))
-    implementation(project(":core:network"))
-    implementation(project(":core:data"))
 }

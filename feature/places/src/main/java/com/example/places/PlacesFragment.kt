@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.places.databinding.FragmentPlacesBinding
 
-class NearbyFragment: Fragment() {
+class PlacesFragment: Fragment() {
 
     private var _binding: FragmentPlacesBinding? = null
 

@@ -1,10 +1,14 @@
 package com.example.emair.di
 
 import android.app.Application
-import com.example.tickets.di.deps.TicketsComponentDependenciesProvider
-import com.example.tickets.di.deps.TicketsDependencies
+import com.example.search.di.deps.SearchComponentDependenciesProvider
+import com.example.search.di.deps.SearchDependencies
+import com.example.home.di.deps.HomeComponentDependenciesProvider
+import com.example.home.di.deps.HomeDependencies
 
-class EMAirApp: Application(), TicketsComponentDependenciesProvider {
+class EMAirApp: Application(),
+    HomeComponentDependenciesProvider,
+    SearchComponentDependenciesProvider {
 
     val applicationComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent
@@ -18,7 +22,10 @@ class EMAirApp: Application(), TicketsComponentDependenciesProvider {
         //appComponent = DaggerAppComponent.factory().create(this)
     }
 
-    override fun getTicketsComponentDependencies(): TicketsDependencies {
+    override fun getHomeComponentDependencies(): HomeDependencies {
+        return applicationComponent
+    }
+    override fun getSearchComponentDependencies(): SearchDependencies {
         return applicationComponent
     }
 
