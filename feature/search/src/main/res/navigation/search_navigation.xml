@@ -5,13 +5,30 @@
     android:id="@+id/search_nav_graph"
     app:startDestination="@id/fragment_search">
 
-    <fragment
+    <dialog
         android:id="@+id/fragment_search"
         android:name="com.example.search.ModalSearchFragment"
-        android:label="@string/anywhere"
+        android:label="Поиск"
         tools:layout="@layout/bottom_sheet">
         <deepLink
             app:uri="android-app://com.example/search_fragment" />
-    </fragment>
+        <action
+            android:id="@+id/action_fragment_search_to_fragment_filter"
+            app:destination="@id/fragment_filter"
+            app:popUpToSaveState="true"/>
+    </dialog>
+
+    <dialog
+        android:id="@+id/fragment_filter"
+        android:name="com.example.search.FilterFragment"
+        android:label="Фильтр"
+        tools:layout="@layout/layout_filter">
+        <deepLink
+            app:uri="android-app://com.example/search_fragment_filter" />
+        <action
+            android:id="@+id/action_fragment_filter_to_fragment_search2"
+            app:destination="@id/fragment_search"
+            app:restoreState="true" />
+    </dialog>
 
 </navigation>

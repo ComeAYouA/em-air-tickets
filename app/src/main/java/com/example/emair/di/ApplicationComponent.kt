@@ -19,10 +19,6 @@ import javax.inject.Singleton
 abstract class ApplicationComponent: HomeDependencies, SearchDependencies {
     abstract override val ticketsApi: TicketsApi
     abstract override val citiesFlowUtil: CitiesFlowUtil
-    override fun provideSearchDialog(): BottomSheetDialogFragment = bottomSheetDialog
-
-    private val bottomSheetDialog: BottomSheetDialogFragment
-        get() = ModalSearchFragment()
 
     @Component.Builder
     interface Builder{

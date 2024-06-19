@@ -8,5 +8,4 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 interface HomeDependencies{
     val ticketsApi: TicketsApi
     val citiesFlowUtil: CitiesFlowUtil
-    fun provideSearchDialog(): BottomSheetDialogFragment
 }

@@ -16,7 +16,6 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:background="@drawable/background_rounded_top_16_grey_1">
-
         <View
             android:id="@+id/view2"
             android:layout_width="38dp"
@@ -113,34 +112,96 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <FrameLayout
-            android:id="@+id/frame_layout_1"
-            android:layout_width="match_parent"
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_1_view"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
+            app:filter_title="@string/difficult_way"
+            app:filter_background="@drawable/background_filter_1"
+            app:filter_icon="@drawable/ic_diff_way"
             app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
-
-            <include
-                android:id="@+id/list_filters"
-                layout="@layout/list_filters" />
-        </FrameLayout>
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"/>
 
 
-        <FrameLayout
-            android:id="@+id/frame_layout_2"
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_2_view"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:filter_background="@drawable/background_filter_2"
+            app:filter_icon="@drawable/ic_word_web"
+            app:filter_title="@string/anywhere"
+            app:layout_constraintEnd_toStartOf="@+id/filter_3_view"
+            app:layout_constraintStart_toEndOf="@+id/filter_1_view"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_3_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:filter_background="@drawable/background_filter_3"
+            app:filter_icon="@drawable/ic_calendar"
+            app:filter_title="@string/holidays"
+            app:layout_constraintEnd_toStartOf="@+id/filter_4_view"
+            app:layout_constraintStart_toEndOf="@+id/filter_2_view"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_4_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:filter_background="@drawable/background_filter_4"
+            app:filter_icon="@drawable/ic_fire"
+            app:filter_title="@string/fire_offer"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+
+        <LinearLayout
+            android:id="@+id/popular_places_layout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="30dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp"
+            android:paddingHorizontal="16dp"
+            android:background="@drawable/background_rounded_16_grey_2"
+            android:orientation="vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/frame_layout_1">
+            app:layout_constraintTop_toBottomOf="@+id/filter_1_view">
 
-            <include
-                android:id="@+id/list_popular_places"
-                layout="@layout/list_popular_places" />
-        </FrameLayout>
+            <com.example.search.ui.ItemPopularPlaceView
+                android:id="@+id/popular_place_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:place_icon="@drawable/img_istanbul"
+                app:place_title="@string/istanbul"/>
+
+            <com.example.search.ui.ItemPopularPlaceView
+                android:id="@+id/popular_place_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:place_icon="@drawable/img_sochi"
+                app:place_title="@string/sochi"/>
+
+            <com.example.search.ui.ItemPopularPlaceView
+                android:id="@+id/popular_place_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:place_icon="@drawable/img_phuket"
+                app:place_title="@string/phuket"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

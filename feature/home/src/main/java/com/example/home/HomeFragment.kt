@@ -3,15 +3,20 @@ package com.example.home
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.data.CitiesFlowUtil
 import com.example.home.databinding.FragmentHomeBinding
@@ -40,6 +45,7 @@ class HomeFragment: Fragment() {
 
     private val offersAdapter = OffersAdapter()
 
+
     override fun onAttach(context: Context) {
         homeComponent = DaggerHomeComponent
             .builder()
@@ -52,6 +58,7 @@ class HomeFragment: Fragment() {
         homeComponent.inject(this)
 
         super.onAttach(context)
+
     }
 
     override fun onCreateView(
@@ -105,7 +112,11 @@ class HomeFragment: Fragment() {
         binding.editTextCityTo.setOnClickListener{
             citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
 
-            searchModalFragment.show(requireActivity().supportFragmentManager, "ModalBottomSheet")
+            val request = NavDeepLinkRequest.Builder.fromUri(
+                "android-app://com.example/search_fragment".toUri()
+            ).build()
+
+            findNavController().navigate(request)
         }
     }
 
