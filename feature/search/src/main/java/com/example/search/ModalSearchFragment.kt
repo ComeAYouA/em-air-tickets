@@ -67,20 +67,20 @@ class ModalSearchFragment: BottomSheetDialogFragment() {
         setupPopularPlacesList()
         setupDeleteButton()
         setupFiltersList()
-//        setupSearchBar()
+        setupSearchBar()
 
 
         return binding.root
     }
 
-//    private fun setupSearchBar() {
-//        binding.searchIcon.setOnClickListener{
-//            val request = NavDeepLinkRequest.Builder.fromUri(
-//                "android-app://com.example/tickets_fragment".toUri()
-//            ).build()
-//            findNavController().navigate(request)
-//        }
-//    }
+    private fun setupSearchBar() {
+        binding.searchIcon.setOnClickListener{
+            val request = NavDeepLinkRequest.Builder.fromUri(
+                "android-app://com.example/tickets_fragment".toUri()
+            ).build()
+            findNavController().navigate(request)
+        }
+    }
 
     private fun setupFiltersList() {
         val action: (View) -> Unit = {

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.tickets"
+    namespace = "com.example.offers"
 }
 
 dependencies {

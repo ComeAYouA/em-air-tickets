@@ -17,6 +17,6 @@
 
     <include app:graph="@navigation/profile_navigation"/>
 
-<!--    <include app:graph="@navigation/tickets_navigation"/>-->
+    <include app:graph="@navigation/tickets_navigation"/>
 
 </navigation>

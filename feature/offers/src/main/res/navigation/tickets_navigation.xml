@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/tickets_navigation"
+    app:startDestination="@id/ticketsFragment">
+
+    <fragment
+        android:id="@+id/ticketsFragment"
+        android:name="com.example.offer.TicketsFragment"
+        android:label="TicketsFragment">
+        <deepLink
+            app:uri="android-app://com.example/tickets_fragment" />
+    </fragment>
+</navigation>
