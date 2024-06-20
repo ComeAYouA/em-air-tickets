@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottom_sheet"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="23dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@drawable/background_rounded_top_16_grey_1">
+        <View
+            android:id="@+id/view2"
+            android:layout_width="38dp"
+            android:layout_height="5dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/backround_rounded_10_grey_5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="45dp"
+            android:background="@drawable/background_rounded_16_grey_2"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/airplane_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_airplane"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/edit_text_city_from"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/city_from_hint"
+                android:padding="1dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/grey_6"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/airplane_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/grey_4"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/search_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_search_default"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_city_from" />
+
+            <EditText
+                android:id="@+id/edit_text_city_to"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/hint_city_to"
+                android:padding="1dp"
+                android:textColor="@color/white"
+                android:textColorHint="@color/grey_6"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/delete_button"
+                app:layout_constraintStart_toEndOf="@+id/search_icon"
+                app:layout_constraintTop_toBottomOf="@+id/edit_text_city_from" />
+
+            <ImageButton
+                android:id="@+id/delete_button"
+                android:layout_width="24dp"
+                android:layout_height="0dp"
+                android:background="@null"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_delete"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_1_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:filter_title="@string/difficult_way"
+            app:filter_background="@drawable/background_filter_1"
+            app:filter_icon="@drawable/ic_diff_way"
+            app:layout_constraintStart_toStartOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"/>
+
+
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_2_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:filter_background="@drawable/background_filter_2"
+            app:filter_icon="@drawable/ic_word_web"
+            app:filter_title="@string/anywhere"
+            app:layout_constraintEnd_toStartOf="@+id/filter_3_view"
+            app:layout_constraintStart_toEndOf="@+id/filter_1_view"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_3_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:filter_background="@drawable/background_filter_3"
+            app:filter_icon="@drawable/ic_calendar"
+            app:filter_title="@string/holidays"
+            app:layout_constraintEnd_toStartOf="@+id/filter_4_view"
+            app:layout_constraintStart_toEndOf="@+id/filter_2_view"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+        <com.example.search.ui.ItemFilterView
+            android:id="@+id/filter_4_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            app:filter_background="@drawable/background_filter_4"
+            app:filter_icon="@drawable/ic_fire"
+            app:filter_title="@string/fire_offer"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+
+        <LinearLayout
+            android:id="@+id/popular_places_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="30dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="16dp"
+            android:paddingHorizontal="16dp"
+            android:background="@drawable/background_rounded_16_grey_2"
+            android:orientation="vertical"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/filter_1_view">
+
+            <com.example.search.ui.ItemPopularPlaceView
+                android:id="@+id/popular_place_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:place_icon="@drawable/img_istanbul"
+                app:place_title="@string/istanbul"/>
+
+            <com.example.search.ui.ItemPopularPlaceView
+                android:id="@+id/popular_place_2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:place_icon="@drawable/img_sochi"
+                app:place_title="@string/sochi"/>
+
+            <com.example.search.ui.ItemPopularPlaceView
+                android:id="@+id/popular_place_3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:place_icon="@drawable/img_phuket"
+                app:place_title="@string/phuket"/>
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

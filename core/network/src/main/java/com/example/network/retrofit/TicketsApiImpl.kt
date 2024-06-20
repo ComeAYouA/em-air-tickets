@@ -10,5 +10,5 @@ class TicketsApiImpl @Inject constructor(
 ): TicketsApi {
     private val api = retrofit.create(TicketsApi::class.java)
 
-    override suspend fun getOffers(): OffersResponse = api.getOffers()
+    override suspend fun getOffers(): OffersResponse = OffersResponse(listOf())
 }

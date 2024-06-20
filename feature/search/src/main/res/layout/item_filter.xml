@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/filter_1"
+    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+    <FrameLayout
+        android:id="@+id/filter_background"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="12dp"
+        android:background="@drawable/background_filter_1">
+        <ImageView
+            android:id="@+id/filter_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:importantForAccessibility="no"
+            android:src="@drawable/ic_diff_way" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/filter_title"
+        android:layout_width="70dp"
+        android:layout_marginTop="8dp"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:text="@string/difficult_way"
+        android:textColor="@color/white" />
+</LinearLayout>

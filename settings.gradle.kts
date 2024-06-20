@@ -21,7 +21,7 @@ dependencyResolutionManagement {
 
 rootProject.name = "EMAir"
 include(":app")
-include(":feature:tickets")
+include(":feature:home")
 include(":core:ui")
 include(":feature:hotels")
 include(":feature:places")
@@ -29,3 +29,5 @@ include(":feature:subscriptions")
 include(":feature:profile")
 include(":core:network")
 include(":core:data")
+include(":feature:search")
+include(":feature:offers")

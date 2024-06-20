@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ItemFilterView">
+        <attr name="filter_title" format="string"/>
+        <attr name="filter_icon" format="integer"/>
+        <attr name="filter_background" format="integer"/>
+    </declare-styleable>
+
+    <declare-styleable name="ItemPopularPlaceView">
+        <attr name="place_title" format="string"/>
+        <attr name="place_icon" format="integer"/>
+    </declare-styleable>
+</resources>

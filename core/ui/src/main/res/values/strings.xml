@@ -13,6 +13,9 @@
     <string name="difficult_way">Сложный путь</string>
     <string name="anywhere">Куда угодно</string>
     <string name="holidays">Выходные</string>
+    <string name="sochi">Сочи</string>
+    <string name="istanbul">Станбул</string>
+    <string name="phuket">Пхукет</string>
     <string name="fire_offer">Горячие билеты</string>
 
 </resources>

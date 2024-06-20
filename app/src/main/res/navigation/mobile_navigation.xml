@@ -3,34 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_air_tickets">
+    app:startDestination="@id/home_nav_graph">
 
-    <fragment
-        android:id="@+id/navigation_air_tickets"
-        android:name="com.example.tickets.TicketsFragment"
-        android:label="@string/air_tickets"
-        tools:layout="@layout/fragment_tickets" />
+    <include app:graph="@navigation/home_navigation"/>
 
-    <fragment
-        android:id="@+id/navigation_hotels"
-        android:name="com.example.hotels.HotelsFragment"
-        android:label="@string/hotels"
-        tools:layout="@layout/fragment_hotels" />
+    <include app:graph="@navigation/search_navigation"/>
 
-    <fragment
-        android:id="@+id/navigation_nearby"
-        android:name="com.example.places.NearbyFragment"
-        android:label="@string/nearby"
-        tools:layout="@layout/fragment_nearby" />
+    <include app:graph="@navigation/hotels_navigation"/>
 
-    <fragment
-        android:id="@+id/navigation_subscriptions"
-        android:name="com.example.subscriptions.SubscriptionsFragment"
-        android:label="@string/subscriptions"
-        tools:layout="@layout/fragment_subscriptions" />
-    <fragment
-        android:id="@+id/navigation_profile"
-        android:name="com.example.profile.ProfileFragment"
-        android:label="@string/profile"
-        tools:layout="@layout/fragment_profile" />
+    <include app:graph="@navigation/places_navigation"/>
+
+    <include app:graph="@navigation/subscriptions_navigation"/>
+
+    <include app:graph="@navigation/profile_navigation"/>
+
+    <include app:graph="@navigation/tickets_navigation"/>
+
 </navigation>
