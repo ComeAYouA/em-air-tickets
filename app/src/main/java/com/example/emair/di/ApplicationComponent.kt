@@ -7,6 +7,7 @@ import com.example.network.di.NetworkModule
 import com.example.search.ModalSearchFragment
 import com.example.search.di.deps.SearchDependencies
 import com.example.home.di.deps.HomeDependencies
+import com.example.offer.di.deps.OffersDependencies
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.BindsInstance
@@ -16,9 +17,13 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(modules = [NetworkModule::class])
-abstract class ApplicationComponent: HomeDependencies, SearchDependencies {
-    abstract override val ticketsApi: TicketsApi
-    abstract override val citiesFlowUtil: CitiesFlowUtil
+interface ApplicationComponent:
+    HomeDependencies,
+    SearchDependencies,
+    OffersDependencies
+{
+    override val ticketsApi: TicketsApi
+    override val citiesFlowUtil: CitiesFlowUtil
 
     @Component.Builder
     interface Builder{

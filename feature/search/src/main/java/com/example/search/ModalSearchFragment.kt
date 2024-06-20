@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.core.net.toUri
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -63,14 +64,30 @@ class ModalSearchFragment: BottomSheetDialogFragment() {
             false
         )
 
-        subscribeUi()
         setupPopularPlacesList()
         setupDeleteButton()
         setupFiltersList()
         setupSearchBar()
 
-
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
+        citiesFlowUtil.arrivalCityChanged(binding.editTextCityTo.text.toString())
+
+        super.onDestroyView()
+
+        _binding = null
+    }
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = super.onCreateDialog(savedInstanceState)
+        dialog.setOnShowListener { dialogInterface ->
+            val bottomSheetDialog = dialogInterface as BottomSheetDialog
+            setupFullHeight(bottomSheetDialog)
+        }
+        return dialog
     }
 
     private fun setupSearchBar() {
@@ -79,6 +96,14 @@ class ModalSearchFragment: BottomSheetDialogFragment() {
                 "android-app://com.example/tickets_fragment".toUri()
             ).build()
             findNavController().navigate(request)
+        }
+        binding.editTextCityFrom.apply {
+            setText(citiesFlowUtil.departureCity.value)
+            doAfterTextChanged { citiesFlowUtil.departureCityChanged(it?.toString()?:"")}
+        }
+        binding.editTextCityTo.apply{
+            setText(citiesFlowUtil.arrivalCity.value)
+            doAfterTextChanged { citiesFlowUtil.arrivalCityChanged(it?.toString()?:"") }
         }
     }
 
@@ -108,43 +133,6 @@ class ModalSearchFragment: BottomSheetDialogFragment() {
         binding.popularPlace2.setOnClickListener(action)
         binding.popularPlace3.setOnClickListener(action)
     }
-
-
-    private fun subscribeUi() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                launch{
-                    citiesFlowUtil.departureCity.collect{
-                        binding.editTextCityFrom.setText(it)
-                    }
-                }
-                launch{
-                    citiesFlowUtil.arrivalCity.collect{
-                        binding.editTextCityTo.setText(it)
-                    }
-                }
-            }
-        }
-    }
-
-    override fun onDestroyView() {
-        citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
-        citiesFlowUtil.arrivalCityChanged(binding.editTextCityTo.text.toString())
-
-        super.onDestroyView()
-
-        _binding = null
-    }
-
-    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val dialog = super.onCreateDialog(savedInstanceState)
-        dialog.setOnShowListener { dialogInterface ->
-            val bottomSheetDialog = dialogInterface as BottomSheetDialog
-            setupFullHeight(bottomSheetDialog)
-        }
-        return dialog
-    }
-
 
     private fun setupFullHeight(bottomSheetDialog: BottomSheetDialog) {
         val bottomSheet =

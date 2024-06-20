@@ -1,4 +1,4 @@
-package com.example.home
+package com.example.offer
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,28 +10,26 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
-class HomeViewModel (
-    private val api: TicketsApi,
+class OffersViewModel (
+    private val ticketsApi: TicketsApi,
     val citiesFlowUtil: CitiesFlowUtil
 ): ViewModel() {
-
     val offers = flow {
-        val offers = api.getOffers().offers
+        val offers = ticketsApi.getTicketsOffers().offers
         emit(offers)
     }.stateIn(
         viewModelScope,
         SharingStarted.WhileSubscribed(5_000),
         listOf()
     )
-
 }
 
 @Suppress("UNCHECKED_CAST")
 class Factory @Inject constructor(
-    private val api: TicketsApi,
+    private val ticketsApi: TicketsApi,
     private val citiesFlowUtil: CitiesFlowUtil
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        return HomeViewModel(api, citiesFlowUtil) as T
+        return OffersViewModel(ticketsApi, citiesFlowUtil) as T
     }
 }

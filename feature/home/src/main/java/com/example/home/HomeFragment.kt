@@ -3,12 +3,10 @@ package com.example.home
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -23,9 +21,9 @@ import com.example.home.databinding.FragmentHomeBinding
 import com.example.home.di.DaggerHomeComponent
 import com.example.home.di.HomeComponent
 import com.example.home.di.deps.HomeComponentDependenciesProvider
-import com.example.home.rv.ListItemsDecorations
 import com.example.home.rv.OffersAdapter
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.example.ui.dpToPx
+import com.example.ui.rv.HorizontlListItemDecoration
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -35,10 +33,6 @@ class HomeFragment: Fragment() {
     private val viewModel: HomeViewModel by viewModels{
         homeComponent.ticketsViewModelFactory()
     }
-    @Inject
-    lateinit var citiesFlowUtil: CitiesFlowUtil
-    @Inject
-    lateinit var searchModalFragment: BottomSheetDialogFragment
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
@@ -76,7 +70,8 @@ class HomeFragment: Fragment() {
     }
 
     override fun onDestroyView() {
-        citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
+        viewModel.citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
+        viewModel.citiesFlowUtil.arrivalCityChanged(binding.editTextCityTo.text.toString())
 
         super.onDestroyView()
 
@@ -94,12 +89,12 @@ class HomeFragment: Fragment() {
                     }
                 }
                 launch{
-                    citiesFlowUtil.departureCity.collect{
+                    viewModel.citiesFlowUtil.departureCity.collect{
                         binding.editTextCityFrom.setText(it)
                     }
                 }
                 launch{
-                    citiesFlowUtil.arrivalCity.collect{
+                    viewModel.citiesFlowUtil.arrivalCity.collect{
                         binding.editTextCityTo.setText(it)
                     }
                 }
@@ -110,7 +105,7 @@ class HomeFragment: Fragment() {
 
     private fun setupCityToButton(){
         binding.editTextCityTo.setOnClickListener{
-            citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
+            viewModel.citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
 
             val request = NavDeepLinkRequest.Builder.fromUri(
                 "android-app://com.example/search_fragment".toUri()
@@ -121,7 +116,6 @@ class HomeFragment: Fragment() {
     }
 
     private fun setupOffersRV(){
-        val displayMetrics = Resources.getSystem().displayMetrics
 
         binding.rvOffers.apply {
             layoutManager = LinearLayoutManager(
@@ -133,17 +127,9 @@ class HomeFragment: Fragment() {
             adapter = offersAdapter
 
             addItemDecoration(
-                ListItemsDecorations(
-                    innerDivider = TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        67f,
-                        displayMetrics
-                    ).toInt(),
-                    outerDivider = TypedValue.applyDimension(
-                        TypedValue.COMPLEX_UNIT_DIP,
-                        16f,
-                        displayMetrics
-                    ).toInt(),
+                HorizontlListItemDecoration(
+                    innerDivider = dpToPx(67),
+                    outerDivider = dpToPx(16),
                 )
             )
         }

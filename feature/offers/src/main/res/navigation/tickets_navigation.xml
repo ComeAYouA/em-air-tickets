@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/ticketsFragment"
-        android:name="com.example.offer.TicketsFragment"
+        android:name="com.example.offer.OffersFragment"
         android:label="TicketsFragment">
         <deepLink
             app:uri="android-app://com.example/tickets_fragment" />

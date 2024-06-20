@@ -1,10 +1,10 @@
-package com.example.home.rv
+package com.example.ui.rv
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class ListItemsDecorations(
+class VerticalListItemDecoration(
     private val innerDivider: Int,
     private val outerDivider: Int,
 ): RecyclerView.ItemDecoration() {
@@ -20,8 +20,8 @@ class ListItemsDecorations(
         val oneSideInnerDivider = innerDivider / 2
 
         with(outRect) {
-            left = if (isPrevTargetView) oneSideInnerDivider else outerDivider
-            right = if (isNextTargetView) oneSideInnerDivider else outerDivider
+            top = if (isPrevTargetView) oneSideInnerDivider else outerDivider
+            bottom = if (isNextTargetView) oneSideInnerDivider else outerDivider
         }
     }
 

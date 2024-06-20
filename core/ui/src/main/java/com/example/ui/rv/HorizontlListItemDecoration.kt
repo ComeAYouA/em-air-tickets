@@ -1,10 +1,10 @@
-package com.example.offer.rv
+package com.example.ui.rv
 
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class ListItemsDecorations(
+class HorizontlListItemDecoration(
     private val innerDivider: Int,
     private val outerDivider: Int,
 ): RecyclerView.ItemDecoration() {

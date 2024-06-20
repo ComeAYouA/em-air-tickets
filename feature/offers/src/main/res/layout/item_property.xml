@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:paddingEnd="10dp"
@@ -8,36 +9,55 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_rounded_50_grey_2">
 
-    <ImageView
-        android:id="@+id/property_icon"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        tools:src="@drawable/ic_arrow_back"/>
 
     <View
         android:id="@+id/divider_1"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"/>
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/property_icon"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginTop="2dp"
+        app:layout_constraintStart_toEndOf="@+id/divider_1"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/ic_arrow_back" />
+
+    <View
+        android:id="@+id/divider_2"
+        android:layout_width="8dp"
+        android:layout_height="8dp"
+        app:layout_constraintStart_toEndOf="@+id/property_icon"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/property_title"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="14sp"
+        android:layout_height="match_parent"
         android:fontFamily="@font/sf_pro_display_semibold"
+        android:gravity="center"
+        android:singleLine="true"
         android:textColor="@color/white"
-        tools:text="фильтр"/>
-
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintStart_toEndOf="@+id/divider_2"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="фильтр " />
 
     <TextView
         android:id="@+id/property_subtitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="14sp"
         android:fontFamily="@font/sf_pro_display_semibold"
         android:textColor="@color/grey_6"
-        tools:text=", сб"/>
+        android:textSize="14sp"
+        android:textStyle="italic"
+        app:layout_constraintBottom_toBottomOf="@+id/property_title"
+        app:layout_constraintStart_toEndOf="@+id/property_title"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text=", сб " />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

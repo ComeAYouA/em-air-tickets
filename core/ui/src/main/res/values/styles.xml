@@ -17,4 +17,7 @@
     <style name="Circular8">
         <item name="cornerSize">8dp</item>
     </style>
+    <style name="Circle">
+        <item name="cornerSize">100%</item>
+    </style>
 </resources>

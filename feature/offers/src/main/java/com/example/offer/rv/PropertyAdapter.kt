@@ -2,13 +2,21 @@ package com.example.offer.rv
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tickets.databinding.ItemPropertyBinding
-import com.example.offer.properties
+import com.example.offer.ui.model.Property
+import com.example.offer.ui.model.properties
+import com.example.offers.databinding.ItemPropertyBinding
 
 class PropertyAdapter: RecyclerView.Adapter<PropertyViewHolder>(){
-    private val data = properties
+
+    interface OnClickListener{
+
+        fun PropertyAdapter.onClick(position: Int)
+    }
+
+    private var onClickListener: OnClickListener? = null
+
+    val data = properties
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PropertyViewHolder {
 
         val binding = ItemPropertyBinding.inflate(
@@ -24,6 +32,11 @@ class PropertyAdapter: RecyclerView.Adapter<PropertyViewHolder>(){
 
     override fun onBindViewHolder(holder: PropertyViewHolder, position: Int) {
         val property = data[position]
-        holder.bind(property)
+
+        holder.bind(property) { onClickListener?.run { onClick(position) } }
     }
+    fun PropertyAdapter.setOnclickListener(onClickListener: OnClickListener){
+        this.onClickListener = onClickListener
+    }
+
 }

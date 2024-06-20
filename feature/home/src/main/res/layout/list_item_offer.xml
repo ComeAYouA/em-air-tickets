@@ -9,7 +9,6 @@
         android:id="@+id/shapeableImageView"
         android:layout_width="132dp"
         android:layout_height="132dp"
-        android:adjustViewBounds="true"
         tools:src="@drawable/img_test"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

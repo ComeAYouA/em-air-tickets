@@ -126,27 +126,32 @@
             android:textColor="@color/white"
             android:textSize="20sp" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_tickets"
-            android:layout_width="match_parent"
-            android:layout_height="184dp"
+        <FrameLayout
             android:layout_marginTop="8dp"
-            android:layout_weight="1"
-            android:textAlignment="center"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
-
-        <TextView
             android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:fontFamily="@font/sf_pro_display_semibold"
-            android:gravity="center"
-            android:text="@string/show_all"
-            android:textColor="@color/blue"
-            android:textSize="16sp" />
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_tickets"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+
+            <ProgressBar
+                android:id="@+id/tickets_offers_progress_bar"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                />
+
+        </FrameLayout>
 
     </LinearLayout>
+
 
     <TextView
         android:layout_width="match_parent"
