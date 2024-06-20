@@ -5,10 +5,14 @@ import com.example.search.di.deps.SearchComponentDependenciesProvider
 import com.example.search.di.deps.SearchDependencies
 import com.example.home.di.deps.HomeComponentDependenciesProvider
 import com.example.home.di.deps.HomeDependencies
+import com.example.offer.di.deps.OffersComponentDependenciesProvider
+import com.example.offer.di.deps.OffersDependencies
 
 class EMAirApp: Application(),
     HomeComponentDependenciesProvider,
-    SearchComponentDependenciesProvider {
+    SearchComponentDependenciesProvider,
+    OffersComponentDependenciesProvider
+{
 
     val applicationComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent
@@ -23,6 +27,9 @@ class EMAirApp: Application(),
     }
 
     override fun getHomeComponentDependencies(): HomeDependencies {
+        return applicationComponent
+    }
+    override fun getOffersComponentDependencies(): OffersDependencies {
         return applicationComponent
     }
     override fun getSearchComponentDependencies(): SearchDependencies {

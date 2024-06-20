@@ -1,6 +1,7 @@
 plugins {
     id("emair.android.library")
     id("emair.androidX")
+    id("emair.dagger")
 }
 
 android {
@@ -9,5 +10,8 @@ android {
 
 dependencies {
     implementation(libs.material)
+    implementation(libs.joda.time)
+    implementation(project(":core:network"))
     implementation(project(":core:ui"))
+    implementation(project(":core:data"))
 }
