@@ -1,8 +1,9 @@
 package com.example.network.retrofit
 
 import com.example.network.TicketsApi
-import com.example.network.model.OffersResponse
-import com.example.network.model.TicketsOffersResponse
+import com.example.network.model.offer.OffersResponse
+import com.example.network.model.ticket.TicketsResponse
+import com.example.network.model.tickets_offer.TicketsOffersResponse
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -13,4 +14,5 @@ class TicketsApiImpl @Inject constructor(
 
     override suspend fun getOffers(): OffersResponse = api.getOffers()
     override suspend fun getTicketsOffers(): TicketsOffersResponse = api.getTicketsOffers()
+    override suspend fun getTickets(): TicketsResponse = api.getTickets()
 }

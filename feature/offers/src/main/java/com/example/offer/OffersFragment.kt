@@ -1,36 +1,33 @@
 package com.example.offer
 
-import android.app.DatePickerDialog
 import android.content.Context
-import android.icu.util.Calendar
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.NavDeepLinkRequest
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.offer.di.DaggerOffersComponent
 import com.example.offer.di.OffersComponent
 import com.example.offer.di.deps.OffersComponentDependenciesProvider
 import com.example.offer.rv.OfferAdapter
 import com.example.offer.rv.PropertyAdapter
-import com.example.offer.ui.model.toDayOfWeek
-import com.example.offer.ui.model.toMonth
 import com.example.offers.databinding.LayoutOffersBinding
+import com.example.ui.defaultNavAnimationsOptions
 import com.example.ui.dpToPx
-import com.example.ui.rv.HorizontlListItemDecoration
+import com.example.ui.rv.HorizontalListItemDecoration
 import com.example.ui.rv.VerticalListItemDecoration
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class OffersFragment: Fragment() {
-
+internal class OffersFragment: Fragment() {
     private lateinit var offersComponent: OffersComponent
 
     private var _binding: LayoutOffersBinding? = null
@@ -48,33 +45,6 @@ class OffersFragment: Fragment() {
     private val viewModel: OffersViewModel by viewModels {
         offersComponent.offersViewModelFactory()
     }
-
-    private val propertiesRVonClickListener: PropertyAdapter.OnClickListener =
-        object: PropertyAdapter.OnClickListener{
-            override fun PropertyAdapter.onClick(position: Int) {
-                when(position){
-                    0 -> { this.pickDate(position) }
-                }
-            }
-
-        }
-
-    private fun PropertyAdapter.pickDate(position: Int) {
-        DatePickerDialog(requireActivity()).apply {
-            setOnDateSetListener { _, year, month, dayOfMonth ->
-                val calendar = Calendar.getInstance()
-                calendar.set(year, month, dayOfMonth, 0, 0)
-                calendar.firstDayOfWeek = Calendar.MONDAY
-
-                data[position].title = "$dayOfMonth ${(month + 1).toMonth().title}"
-                val dayOfWeek =  (calendar.get(Calendar.DAY_OF_WEEK) - 1).toDayOfWeek().title
-
-                data[position].subtitle = ", $dayOfWeek"
-                notifyItemChanged(position)
-            }
-        }.show()
-    }
-
 
     override fun onAttach(context: Context) {
         offersComponent = DaggerOffersComponent.builder()
@@ -95,17 +65,6 @@ class OffersFragment: Fragment() {
         subscribeUi()
     }
 
-    private fun subscribeUi() {
-        lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.offers.collect{
-                    if (it.isNotEmpty()) binding.ticketsOffersProgressBar.visibility = View.INVISIBLE
-                    offerAdapter.setData(it.take(3))
-                }
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -116,8 +75,41 @@ class OffersFragment: Fragment() {
         setupPropertiesRv()
         setupSearchBar()
         setupOffersRv()
+        setupSeeAllButton()
 
         return binding.root
+    }
+
+    override fun onDestroyView() {
+        viewModel.dataFlowUtil.updateDepartureCity(binding.editTextCityFrom.text.toString())
+        viewModel.dataFlowUtil.updateArrivalCity(binding.editTextCityTo.text.toString())
+
+        super.onDestroyView()
+
+        _binding = null
+    }
+
+    private fun setupSeeAllButton() {
+        binding.seeAllButton.setOnClickListener{
+            val request = NavDeepLinkRequest.Builder.fromUri(
+                "android-app://com.example/tickets_fragment".toUri()
+            ).build()
+            findNavController().navigate(
+                request,
+                defaultNavAnimationsOptions
+            )
+        }
+    }
+
+    private fun subscribeUi() {
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED){
+                viewModel.offers.collect{
+                    if (it.isNotEmpty()) binding.ticketsOffersProgressBar.visibility = View.INVISIBLE
+                    offerAdapter.setData(it.take(3))
+                }
+            }
+        }
     }
 
     private fun setupOffersRv() {
@@ -130,12 +122,12 @@ class OffersFragment: Fragment() {
 
     private fun setupSearchBar() {
         binding.editTextCityFrom.apply {
-            setText(viewModel.citiesFlowUtil.departureCity.value)
-            doAfterTextChanged { viewModel.citiesFlowUtil.departureCityChanged(it?.toString()?:"")}
+            setText(viewModel.dataFlowUtil.departureCity.value)
+            doAfterTextChanged { viewModel.dataFlowUtil.updateDepartureCity(it?.toString()?:"")}
         }
         binding.editTextCityTo.apply{
-            setText(viewModel.citiesFlowUtil.arrivalCity.value)
-            doAfterTextChanged { viewModel.citiesFlowUtil.arrivalCityChanged(it?.toString()?:"") }
+            setText(viewModel.dataFlowUtil.arrivalCity.value)
+            doAfterTextChanged { viewModel.dataFlowUtil.updateArrivalCity(it?.toString()?:"") }
         }
         binding.replaceButton.setOnClickListener{
             val temp = binding.editTextCityFrom.text
@@ -145,24 +137,21 @@ class OffersFragment: Fragment() {
         binding.deleteButton.setOnClickListener{
             binding.editTextCityTo.setText("")
         }
-    }
-
-    override fun onDestroyView() {
-        viewModel.citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
-        viewModel.citiesFlowUtil.arrivalCityChanged(binding.editTextCityTo.text.toString())
-
-        super.onDestroyView()
-
-        _binding = null
+        binding.backButton.setOnClickListener{
+            findNavController().popBackStack()
+        }
     }
 
     private fun setupPropertiesRv() {
         binding.rvProperties.apply {
             adapter = propertiesAdapter.apply {
-                setOnclickListener(propertiesRVonClickListener)
+                setData(viewModel.properties)
+                setOnclickListener(
+                    propertiesRVonClickListener(viewModel)
+                )
             }
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            addItemDecoration(HorizontlListItemDecoration(dpToPx(8), dpToPx(16)))
+            addItemDecoration(HorizontalListItemDecoration(dpToPx(8), dpToPx(16)))
         }
     }
 }

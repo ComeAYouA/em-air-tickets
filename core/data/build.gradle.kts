@@ -9,6 +9,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
+    implementation(project(":core:model"))
 }

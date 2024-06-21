@@ -3,11 +3,11 @@ package com.example.offer.rv
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.network.model.TicketsOffer
+import com.example.network.model.tickets_offer.TicketsOffer
 import com.example.ui.R
 import com.example.offers.databinding.ItemOfferBinding
 
-class OfferAdapter: RecyclerView.Adapter<OfferViewHolder>(){
+internal  class OfferAdapter: RecyclerView.Adapter<OfferViewHolder>(){
     private val data = mutableListOf<TicketsOffer>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OfferViewHolder {
 

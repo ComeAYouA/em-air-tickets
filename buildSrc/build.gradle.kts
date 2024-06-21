@@ -10,6 +10,7 @@ repositories {
     mavenCentral()
 }
 
+
 dependencies{
     implementation(libs.kotlin.gradle.plugin)
     implementation(libs.gradle.build.tools)
@@ -39,6 +40,10 @@ gradlePlugin{
         register("DaggerConvention") {
             id = "emair.dagger"
             implementationClass = "DaggerConventionPlugin"
+        }
+        register("JvmConvention") {
+            id = "emair.jvm.library"
+            implementationClass = "JvmLibraryConventionPlugin"
         }
     }
 }

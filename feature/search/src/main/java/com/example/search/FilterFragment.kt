@@ -8,7 +8,7 @@ import androidx.fragment.app.DialogFragment
 import com.example.search.databinding.LayoutFilterBinding
 
 
-class FilterFragment: DialogFragment() {
+internal class FilterFragment: DialogFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -16,6 +16,7 @@ class FilterFragment: DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = LayoutFilterBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 

@@ -1,9 +1,7 @@
 package com.example.home
 
 import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,20 +14,19 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.data.CitiesFlowUtil
 import com.example.home.databinding.FragmentHomeBinding
 import com.example.home.di.DaggerHomeComponent
 import com.example.home.di.HomeComponent
 import com.example.home.di.deps.HomeComponentDependenciesProvider
 import com.example.home.rv.OffersAdapter
+import com.example.ui.defaultNavAnimationsOptions
 import com.example.ui.dpToPx
-import com.example.ui.rv.HorizontlListItemDecoration
+import com.example.ui.rv.HorizontalListItemDecoration
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class HomeFragment: Fragment() {
-
+internal class HomeFragment: Fragment() {
     private lateinit var homeComponent: HomeComponent
+
     private val viewModel: HomeViewModel by viewModels{
         homeComponent.ticketsViewModelFactory()
     }
@@ -37,8 +34,7 @@ class HomeFragment: Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private val offersAdapter = OffersAdapter()
-
+    private val offersAdapter by lazy { OffersAdapter() }
 
     override fun onAttach(context: Context) {
         homeComponent = DaggerHomeComponent
@@ -52,7 +48,6 @@ class HomeFragment: Fragment() {
         homeComponent.inject(this)
 
         super.onAttach(context)
-
     }
 
     override fun onCreateView(
@@ -70,8 +65,8 @@ class HomeFragment: Fragment() {
     }
 
     override fun onDestroyView() {
-        viewModel.citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
-        viewModel.citiesFlowUtil.arrivalCityChanged(binding.editTextCityTo.text.toString())
+        viewModel.dataFlowUtil.updateDepartureCity(binding.editTextCityFrom.text.toString())
+        viewModel.dataFlowUtil.updateArrivalCity(binding.editTextCityTo.text.toString())
 
         super.onDestroyView()
 
@@ -89,12 +84,12 @@ class HomeFragment: Fragment() {
                     }
                 }
                 launch{
-                    viewModel.citiesFlowUtil.departureCity.collect{
+                    viewModel.dataFlowUtil.departureCity.collect{
                         binding.editTextCityFrom.setText(it)
                     }
                 }
                 launch{
-                    viewModel.citiesFlowUtil.arrivalCity.collect{
+                    viewModel.dataFlowUtil.arrivalCity.collect{
                         binding.editTextCityTo.setText(it)
                     }
                 }
@@ -102,21 +97,22 @@ class HomeFragment: Fragment() {
         }
     }
 
-
     private fun setupCityToButton(){
         binding.editTextCityTo.setOnClickListener{
-            viewModel.citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
+            viewModel.dataFlowUtil.updateDepartureCity(binding.editTextCityFrom.text.toString())
 
             val request = NavDeepLinkRequest.Builder.fromUri(
                 "android-app://com.example/search_fragment".toUri()
             ).build()
 
-            findNavController().navigate(request)
+            findNavController().navigate(
+                request,
+                defaultNavAnimationsOptions
+            )
         }
     }
 
     private fun setupOffersRV(){
-
         binding.rvOffers.apply {
             layoutManager = LinearLayoutManager(
                 requireContext(),
@@ -127,7 +123,7 @@ class HomeFragment: Fragment() {
             adapter = offersAdapter
 
             addItemDecoration(
-                HorizontlListItemDecoration(
+                HorizontalListItemDecoration(
                     innerDivider = dpToPx(67),
                     outerDivider = dpToPx(16),
                 )

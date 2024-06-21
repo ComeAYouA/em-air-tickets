@@ -23,4 +23,5 @@ dependencies {
     implementation(project(":feature:subscriptions"))
     implementation(project(":feature:search"))
     implementation(project(":feature:offers"))
+    implementation(project(":feature:tickets"))
 }

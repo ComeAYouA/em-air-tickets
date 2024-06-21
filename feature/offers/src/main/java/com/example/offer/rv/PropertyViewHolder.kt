@@ -7,7 +7,7 @@ import com.example.offers.databinding.ItemPropertyBinding
 import com.example.ui.dpToPx
 
 
-class PropertyViewHolder(private val binding: ItemPropertyBinding): ViewHolder(binding.root) {
+internal class PropertyViewHolder(private val binding: ItemPropertyBinding): ViewHolder(binding.root) {
     fun bind(property: Property, click: (() -> Unit)?){
 
         binding.root.setOnClickListener{ click?.invoke() }

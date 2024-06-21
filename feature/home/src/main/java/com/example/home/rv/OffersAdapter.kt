@@ -4,11 +4,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.network.model.Offer
-import com.example.home.R
+import com.example.network.model.offer.Offer
 import com.example.home.databinding.ListItemOfferBinding
 
-class OffersAdapter: RecyclerView.Adapter<OffersViewHolder>(){
+internal class OffersAdapter: RecyclerView.Adapter<OffersViewHolder>(){
     private val data = mutableListOf<Offer>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OffersViewHolder {
 

@@ -1,4 +1,4 @@
-package com.example.network.model
+package com.example.network.model.tickets_offer
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

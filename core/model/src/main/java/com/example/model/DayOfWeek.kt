@@ -1,4 +1,4 @@
-package com.example.offer.ui.model
+package com.example.model
 
 enum class DayOfWeek(val title: String) {
     Monday("пн"),

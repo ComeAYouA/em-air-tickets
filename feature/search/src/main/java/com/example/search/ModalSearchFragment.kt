@@ -4,42 +4,34 @@ import android.app.Dialog
 import android.content.Context
 import android.content.res.Resources
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.activity.OnBackPressedCallback
 import androidx.core.net.toUri
 import androidx.core.widget.doAfterTextChanged
-import androidx.fragment.app.Fragment
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.NavController
 import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.example.data.CitiesFlowUtil
+import com.example.data.DataFlowUtil
 import com.example.search.databinding.BottomSheetBinding
 import com.example.search.di.DaggerSearchComponent
 import com.example.search.di.SearchComponent
 import com.example.search.di.deps.SearchComponentDependenciesProvider
+import com.example.ui.defaultNavAnimationsOptions
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
-class ModalSearchFragment: BottomSheetDialogFragment() {
+internal class ModalSearchFragment: BottomSheetDialogFragment() {
     private var _binding: BottomSheetBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var searchComponent: SearchComponent
     @Inject
-    lateinit var citiesFlowUtil: CitiesFlowUtil
+    lateinit var dataFlowUtil: DataFlowUtil
 
     override fun onAttach(context: Context) {
         searchComponent = DaggerSearchComponent
@@ -73,9 +65,6 @@ class ModalSearchFragment: BottomSheetDialogFragment() {
     }
 
     override fun onDestroyView() {
-        citiesFlowUtil.departureCityChanged(binding.editTextCityFrom.text.toString())
-        citiesFlowUtil.arrivalCityChanged(binding.editTextCityTo.text.toString())
-
         super.onDestroyView()
 
         _binding = null
@@ -93,17 +82,20 @@ class ModalSearchFragment: BottomSheetDialogFragment() {
     private fun setupSearchBar() {
         binding.searchIcon.setOnClickListener{
             val request = NavDeepLinkRequest.Builder.fromUri(
-                "android-app://com.example/tickets_fragment".toUri()
+                "android-app://com.example/offers_fragment".toUri()
             ).build()
-            findNavController().navigate(request)
+            findNavController().navigate(
+                request,
+                defaultNavAnimationsOptions
+            )
         }
         binding.editTextCityFrom.apply {
-            setText(citiesFlowUtil.departureCity.value)
-            doAfterTextChanged { citiesFlowUtil.departureCityChanged(it?.toString()?:"")}
+            setText(dataFlowUtil.departureCity.value)
+            doAfterTextChanged { dataFlowUtil.updateDepartureCity(it?.toString()?:"")}
         }
         binding.editTextCityTo.apply{
-            setText(citiesFlowUtil.arrivalCity.value)
-            doAfterTextChanged { citiesFlowUtil.arrivalCityChanged(it?.toString()?:"") }
+            setText(dataFlowUtil.arrivalCity.value)
+            doAfterTextChanged { dataFlowUtil.updateArrivalCity(it?.toString()?:"") }
         }
     }
 
