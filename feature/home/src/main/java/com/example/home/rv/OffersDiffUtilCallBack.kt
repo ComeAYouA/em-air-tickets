@@ -1,10 +1,10 @@
 package com.example.home.rv
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.network.model.Offer
+import com.example.network.model.offer.Offer
 
 
-class OffersDiffUtilCallBack(
+internal class OffersDiffUtilCallBack(
     private val oldList: List<Offer>,
     private val newList: List<Offer>
 ): DiffUtil.Callback() {

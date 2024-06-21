@@ -7,33 +7,26 @@ import com.example.home.di.deps.HomeComponentDependenciesProvider
 import com.example.home.di.deps.HomeDependencies
 import com.example.offer.di.deps.OffersComponentDependenciesProvider
 import com.example.offer.di.deps.OffersDependencies
+import com.example.tickets.di.deps.TicketsComponentDependenciesProvider
+import com.example.tickets.di.deps.TicketsDependencies
 
-class EMAirApp: Application(),
+internal class EMAirApp: Application(),
     HomeComponentDependenciesProvider,
     SearchComponentDependenciesProvider,
-    OffersComponentDependenciesProvider
+    OffersComponentDependenciesProvider,
+    TicketsComponentDependenciesProvider
 {
-
-    val applicationComponent: ApplicationComponent by lazy {
+    private val applicationComponent: ApplicationComponent by lazy {
         DaggerApplicationComponent
             .builder()
             .application(this)
+            .context(this.applicationContext)
             .build()
     }
 
-    override fun onCreate() {
-        super.onCreate()
-        //appComponent = DaggerAppComponent.factory().create(this)
-    }
-
-    override fun getHomeComponentDependencies(): HomeDependencies {
-        return applicationComponent
-    }
-    override fun getOffersComponentDependencies(): OffersDependencies {
-        return applicationComponent
-    }
-    override fun getSearchComponentDependencies(): SearchDependencies {
-        return applicationComponent
-    }
+    override fun getHomeComponentDependencies(): HomeDependencies = applicationComponent
+    override fun getTicketsComponentDependencies(): TicketsDependencies = applicationComponent
+    override fun getSearchComponentDependencies(): SearchDependencies = applicationComponent
+    override fun getOffersComponentDependencies(): OffersDependencies = applicationComponent
 
 }

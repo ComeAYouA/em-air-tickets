@@ -13,7 +13,7 @@ import com.example.search.databinding.ItemFilterBinding
 import com.example.search.databinding.ItemPopularPlacesBinding
 
 
-class ItemPopularPlaceView @JvmOverloads constructor(
+internal class ItemPopularPlaceView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0

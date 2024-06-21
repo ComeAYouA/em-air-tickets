@@ -29,6 +29,10 @@
             android:id="@+id/action_fragment_filter_to_fragment_search2"
             app:destination="@id/fragment_search"
             app:restoreState="true" />
+        <argument
+            android:name="filter_name"
+            app:argType="string"
+            app:nullable="true" />
     </dialog>
 
 </navigation>

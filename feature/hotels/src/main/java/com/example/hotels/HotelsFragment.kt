@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.hotels.databinding.FragmentHotelsBinding
 
-class HotelsFragment: Fragment() {
+internal class HotelsFragment: Fragment() {
 
     private var _binding: FragmentHotelsBinding? = null
 

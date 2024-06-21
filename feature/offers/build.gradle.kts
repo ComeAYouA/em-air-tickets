@@ -10,8 +10,8 @@ android {
 
 dependencies {
     implementation(libs.material)
-    implementation(libs.joda.time)
     implementation(project(":core:network"))
     implementation(project(":core:ui"))
     implementation(project(":core:data"))
+    implementation(project(":core:model"))
 }

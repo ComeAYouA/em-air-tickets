@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.subscriptions.databinding.FragmentSubscriptionsBinding
 
-class SubscriptionsFragment: Fragment() {
+internal class SubscriptionsFragment: Fragment() {
     
     private var _binding: FragmentSubscriptionsBinding? = null
     

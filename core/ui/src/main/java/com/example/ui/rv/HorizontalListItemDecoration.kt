@@ -4,7 +4,7 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class HorizontlListItemDecoration(
+class HorizontalListItemDecoration(
     private val innerDivider: Int,
     private val outerDivider: Int,
 ): RecyclerView.ItemDecoration() {

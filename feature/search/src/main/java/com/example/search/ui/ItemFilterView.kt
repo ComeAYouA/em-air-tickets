@@ -11,7 +11,7 @@ import com.example.search.R
 import com.example.search.databinding.ItemFilterBinding
 
 
-class ItemFilterView @JvmOverloads constructor(
+internal class ItemFilterView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
